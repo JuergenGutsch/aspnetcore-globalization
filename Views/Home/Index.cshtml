@@ -1,0 +1,82 @@
+﻿@using Microsoft.AspNetCore.Mvc.Localization
+
+@inject IViewLocalizer Localizer
+
+
+@model HomeIndexViewModel
+@{
+    ViewData["Title"] = Localizer["Title"];
+}
+
+<h1>@ViewData["Title"]</h1>
+
+
+<table class="table table-hover">
+    <thead>
+        <tr>
+            <th>@Localizer["Number"]</th>
+            <th>@Localizer["Firstname"]</th>
+            <th>@Localizer["Lastname"]</th>
+            <th>@Localizer["Department"]</th>
+            <th>@Localizer["Phone"]</th>
+            <th>@Localizer["Email"]</th>
+            <th>@Localizer["Date of birth"]</th>
+            <th>@Localizer["Size"]</th>
+            <th>@Localizer["Salery"]</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var empoyee in Model.Employees)
+        {
+            <tr>
+                <td>@empoyee.Number</td>
+                <td>@empoyee.Firstname</td>
+                <td>@empoyee.Lastname</td>
+                <td>@empoyee.Department</td>
+                <td>@empoyee.Phone</td>
+                <td>@empoyee.Email</td>
+                <td>@empoyee.DateOfBirth.ToShortDateString()</td>
+                <td>@Math.Round(empoyee.Size, 2)</td>
+                <td>@empoyee.Salery.ToString("c")</td>
+            </tr>
+        }
+    </tbody>
+    <tfoot>
+        <tr>
+            <td colspan="6">
+                <nav aria-label="Page navigation example">
+                    <ul class="pagination">
+                        @if (Model.Page == 1)
+                        {
+                            <li class="page-item disabled"><a class="page-link">@Localizer["Previous"]</a></li>
+                        }
+                        else
+                        {
+                            <li class="page-item"><a asp-action="Index" asp-controller="Home" asp-route-page="@(Model.Page - 1)" class="page-link">@Localizer["Previous"]</a></li>
+                        }
+                        @for (int i = 1; i <= Model.Pages; i++)
+                        {
+                            @if (Model.Page == i)
+                            {
+                                <li class="page-item disabled"><a class="page-link">@i</a></li>
+                            }
+                            else
+                            {
+                                <li class="page-item"><a asp-action="Index" asp-controller="Home" asp-route-page="@i" class="page-link">@i</a></li>
+                            }
+                        }
+
+                        @if (Model.Page == Model.Pages)
+                        {
+                            <li class="page-item disabled"><a class="page-link">@Localizer["Next"]</a></li>
+                        }
+                        else
+                        {
+                            <li class="page-item"><a asp-action="Index" asp-controller="Home" asp-route-page="@(Model.Page + 1)" class="page-link">@Localizer["Next"]</a></li>
+                        }
+                    </ul>
+                </nav>
+            </td>
+        </tr>
+    </tfoot>
+</table>
