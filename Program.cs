@@ -44,8 +44,8 @@ app.UseRequestLocalization(options =>
     options.SupportedCultures = culture;
     options.SupportedUICultures = culture;
 
-    options.RequestCultureProviders.Clear(); // remove predefined RequestCultureProviders
-    options.RequestCultureProviders.Add(new RouteValueRequestCultureProvider());
+    // options.RequestCultureProviders.Clear(); // remove predefined RequestCultureProviders
+    // options.RequestCultureProviders.Add(new RouteValueRequestCultureProvider());
 });
 
 app.UseAuthorization();
