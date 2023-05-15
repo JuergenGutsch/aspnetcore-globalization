@@ -29,7 +29,7 @@
         @foreach (var empoyee in Model.Employees)
         {
             <tr>
-                <td>@empoyee.Number</td>
+                <td><a asp-action="Details" asp-controller="Home" asp-route-employeeNumber="@empoyee.Number">@empoyee.Number</a></td>
                 <td>@empoyee.Firstname</td>
                 <td>@empoyee.Lastname</td>
                 <td>@empoyee.Department</td>
