@@ -40,7 +40,7 @@ public class HomeController : Controller
         return View(model);
     }
 
-    [Route("/{employeeNumber}/details")]
+    [Route("/{culture}/{employeeNumber}/details")]
     public IActionResult Details (int employeeNumber)
     {
         return View(nameof(Privacy));
